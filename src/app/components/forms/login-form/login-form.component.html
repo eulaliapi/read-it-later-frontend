@@ -1,0 +1,15 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" color="warn">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="name@example.com" required formControlName="email">
+        <mat-icon matSuffix>alternate_email</mat-icon>
+        <mat-error *ngIf="loginForm.get('email')?.invalid">{{getErrorMessage(loginForm.controls['email'])}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" color="warn">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput  formControlName="password">
+        <mat-icon matSuffix>vpn_key</mat-icon>
+        <mat-error *ngIf="loginForm.get('password')?.invalid">{{getErrorMessage(loginForm.controls['password'])}}</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="warn" [disabled]="!loginForm.valid">Login</button>
+</form>

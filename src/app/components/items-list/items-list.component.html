@@ -1,0 +1,7 @@
+<h1>My List</h1>
+<button mat-fab color="warn" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+</button>
+<div class="items-container">
+    <app-item-card *ngFor="let item of items" [itemContent]="item" (removeItemFromView)="removeItem($event)"></app-item-card>
+</div>

@@ -1,0 +1,21 @@
+<!--da modificare-->
+<mat-toolbar>
+    <mat-toolbar-row>
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>{{user?.user.name}}</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav  color="warn">
+        <mat-nav-list>
+            <a mat-list-item (click)="logout()">Logout</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <section>
+           <app-items-list [items]="user?.items"></app-items-list>
+        </section>
+    </mat-sidenav-content>
+</mat-sidenav-container>

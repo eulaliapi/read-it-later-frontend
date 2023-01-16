@@ -1,0 +1,42 @@
+::ng-deep .mat-card-header-text {
+    margin: 0px!important;
+}
+
+.card-container {
+    margin: .5rem auto;
+    width: 60vw;
+}
+
+a:any-link {
+    display: block;
+    white-space: nowrap;
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color:#f44336;
+}
+
+@media screen and (min-width: 599px){
+    .card-container {
+        width: 250px;
+    }
+     
+}
+
+.mat-card-header .mat-card-title {
+    font-size: 15px;
+}
+
+.mat-card-actions{
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* .stroked-card {
+    background-color: antiquewhite;
+    box-shadow: none;
+}
+
+.stroked-text {
+    color:gray
+} */

@@ -1,0 +1,18 @@
+<form [formGroup]="itemForm"> 
+    <div mat-dialog-content class="form">
+        <mat-form-field appearance="fill" color="warn">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+            <mat-icon matSuffix>create</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill" color="warn">
+            <mat-label>URL</mat-label>
+            <input matInput formControlName="url">
+            <mat-icon matSuffix>link</mat-icon>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Discard</button>
+        <button mat-button color="warn" (click)="onSubmit()" cdkFocusInitial>Save</button>
+    </div>
+</form>

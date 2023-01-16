@@ -1,0 +1,17 @@
+<div #card class="card-container" [id]="itemContent?.id" [attr.data-userId]="itemContent?.user_id">
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{itemContent?.title}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <a [href]="itemContent?.url" 
+        target="_blank">{{itemContent?.url}}
+        </a>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-icon-button (click)="onDeleteCard(card)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>
+</div>

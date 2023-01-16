@@ -1,0 +1,21 @@
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" color="warn">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Matteo9164" required formControlName="name">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="signUpForm.get('name')?.invalid">{{getErrorMessage(signUpForm.controls['name'])}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" color="warn">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="name@example.com" required formControlName="email">
+        <mat-icon matSuffix>alternate_email</mat-icon>
+        <mat-error *ngIf="signUpForm.get('email')?.invalid">{{getErrorMessage(signUpForm.controls['email'])}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" color="warn">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput required formControlName="password">
+        <mat-icon matSuffix>vpn_key</mat-icon>
+        <mat-error *ngIf="signUpForm.get('password')?.invalid">{{getErrorMessage(signUpForm.controls['password'])}}</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="warn" [disabled]="!signUpForm.valid">Sign up</button>
+</form>
