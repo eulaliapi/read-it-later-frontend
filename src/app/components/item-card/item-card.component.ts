@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Item } from 'src/app/models/itemModel';
+import { Item, User } from 'src/app/models/userModel';
 import { ItemsService } from 'src/app/services/items.service';
 
 
@@ -10,18 +10,18 @@ import { ItemsService } from 'src/app/services/items.service';
 })
 export class ItemCardComponent implements OnInit {
 
-  @Output() removeItemFromView = new EventEmitter<Item>();
+  @Output() removeItemFromView = new EventEmitter<HTMLDivElement>();
   @Input() itemContent?: Item;
+  @Input() userId?: User["_id"];
 
-  constructor(private itemsService: ItemsService) { }
+  constructor() { }
 
   ngOnInit(): void {
     
   }
 
   onDeleteCard(card: HTMLDivElement){
-    let itemId = Number(card.id);
-    this.itemsService.deleteItem(itemId).subscribe(res => this.removeItemFromView.emit(res));
+    this.removeItemFromView.emit(card);
   }
 
 }

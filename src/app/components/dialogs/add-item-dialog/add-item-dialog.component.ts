@@ -1,8 +1,7 @@
 import { Component, OnInit , Inject} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { Item } from 'src/app/models/itemModel';
-import { User } from 'src/app/models/userModel';
+import { Item } from 'src/app/models/userModel';
 import { ItemsService } from 'src/app/services/items.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,16 +14,12 @@ import { UserService } from 'src/app/services/user.service';
 export class AddItemDialogComponent implements OnInit {
 
   itemForm!: FormGroup;
-  user: any;
 
   constructor(public dialogRef: MatDialogRef<AddItemDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Item,
-    private fb: FormBuilder,
-    private itemsService: ItemsService,
-    private userService: UserService){ }
+    private fb: FormBuilder){ }
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe( res => this.user = res);
     this.itemForm = this.fb.group({
       title: '',
       url: ''
@@ -36,9 +31,8 @@ export class AddItemDialogComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.itemForm.value.title != '' || this.itemForm.value.url != ''){
-      this.itemsService.postItem(this.itemForm.value, this.user.user.id)
-      .subscribe(item => {this.dialogRef.close({data: item})});
+    if(this.itemForm.value.title && this.itemForm.value.url){
+      this.dialogRef.close({data: this.itemForm.value});
     }
   }
 

@@ -3,5 +3,5 @@
     <mat-icon>add</mat-icon>
 </button>
 <div class="items-container">
-    <app-item-card *ngFor="let item of items" [itemContent]="item" (removeItemFromView)="removeItem($event)"></app-item-card>
+    <app-item-card *ngFor="let item of items" [itemContent]="item" [userId]="userId" (removeItemFromView)="removeItem($event)"></app-item-card>
 </div>

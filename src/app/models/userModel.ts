@@ -1,8 +1,15 @@
-import { Item } from "./itemModel";
-
 export interface User {
-    id?: number;
+    _id?: string;
     name?: string;
-    user: string;
+    email: string;
     password: string;
+    items?: Item[];
+    __v?: number;
+    refreshToken?: string;
+}
+
+export interface Item {
+    _id?: string;
+    title: string;
+    url: string;
 }

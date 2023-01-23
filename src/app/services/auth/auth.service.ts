@@ -16,22 +16,22 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   isAuthenticated(){
-    if(AuthInterceptor.accessToken.length > 0) {
+    if(AuthInterceptor.accessToken != "") {
       return true;
     } else {
-      this.router.navigate(['/signup'])
-      return false
+      this.router.navigate(['/home']);
+      return false;
     }
   }
 
-  signUp(form: FormGroup["value"]) : Observable<User>{
+  signUp(form: FormGroup["value"]) : Observable<Object>{
     let user : User = {
       name: form.name,
-      user: form.email,
+      email: form.email,
       password: form.password,
     };
 
-    let req = this.http.post<User>(`${this.apiUrl}/register`, user, {withCredentials: true});
+    let req = this.http.post<Object>(`${this.apiUrl}/register`, user, {withCredentials: true});
 
     return req;
   }
@@ -39,16 +39,16 @@ export class AuthService {
   login(form: FormGroup["value"]): Observable<any>{
 
     let user: User = {
-      user: form.email,
+      email: form.email,
       password: form.password
     }
 
-    let data = this.http.post<User>(`${this.apiUrl}/auth`, user, {withCredentials: true});
+    let data = this.http.post<any>(`${this.apiUrl}/auth`, user, {withCredentials: true});
     return data;
   }
 
   logout(): Observable<any>{
-    let req = this.http.get<User>(`${this.apiUrl}/logout`, {withCredentials: true})
+    let req = this.http.get<any>(`${this.apiUrl}/logout`, {withCredentials: true})
     return req;
   }
 }

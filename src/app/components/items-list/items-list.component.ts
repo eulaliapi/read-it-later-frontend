@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {MatDialog } from '@angular/material/dialog';
-import { Item } from 'src/app/models/itemModel';
+import { Item, User } from 'src/app/models/userModel';
 import { ItemsService } from 'src/app/services/items.service';
 import { AddItemDialogComponent } from '../dialogs/add-item-dialog/add-item-dialog.component';
 
@@ -12,8 +12,9 @@ import { AddItemDialogComponent } from '../dialogs/add-item-dialog/add-item-dial
 export class ItemsListComponent implements OnInit {
 
   @Input() items?: Item[];
+  @Input() userId?: User["_id"];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private itemsService: ItemsService) { }
 
   ngOnInit(): void {
   }
@@ -23,14 +24,29 @@ export class ItemsListComponent implements OnInit {
 
     dialog.afterClosed().subscribe(res => {
       if(res != undefined) {
-        this.items?.push(res.data);
+        if(res.data.title && res.data.url){
+          console.log("mando", res.data.title, res.data.url)
+          this.postItem(res.data);
+        }
       }
     });
     
   }
 
-  removeItem(e: Item) {
-    this.items = this.items?.filter(item => item.id != e.id);
+  postItem(item: Item) {
+      this.itemsService.postItem(item, this.userId).subscribe({
+        next: (res) => this.items?.push(res.items[0]),
+        error: (err) => console.log(err),
+      })
+  }
+
+  removeItem(e: HTMLDivElement) {
+    const userId = e.dataset['userid'];
+    const itemId = e.id;
+    this.itemsService.deleteItem(userId, itemId).subscribe({
+      next: (res) => this.items = this.items?.filter(item => item._id != itemId),
+      error: (err) => console.error(err)
+    })
   }
 
 

@@ -1,4 +1,4 @@
-<div #card class="card-container" [id]="itemContent?.id" [attr.data-userId]="itemContent?.user_id">
+<div #card class="card-container" [id]="itemContent?._id" [attr.data-userId]="userId">
 <mat-card>
     <mat-card-header>
         <mat-card-title>{{itemContent?.title}}</mat-card-title>

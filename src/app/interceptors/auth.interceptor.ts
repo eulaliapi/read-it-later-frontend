@@ -7,17 +7,18 @@ import {
   HttpErrorResponse,
   HttpClient
 } from '@angular/common/http';
-import { catchError, map, Observable, switchMap, tap, throwError } from 'rxjs';
+import { catchError, Observable, switchMap, tap, throwError } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   static accessToken = '';
-  apiUrl : string = "http://localhost:3000";
+  apiUrl : string = "https://read-it-later.onrender.com";
 
   constructor(private http: HttpClient) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    console.log(request, next)
     const req = request.clone({
       setHeaders: {
         Authorization: `Bearer ${AuthInterceptor.accessToken}`
@@ -28,7 +29,6 @@ export class AuthInterceptor implements HttpInterceptor {
         return this.http.get(`${this.apiUrl}/refresh`, {withCredentials: true}).pipe(
           switchMap( (res: any) => {
             AuthInterceptor.accessToken = res.accessToken;
-            console.log(AuthInterceptor.accessToken, res.accessToken);
             return next.handle(request.clone({
               setHeaders: {
                 Authorization: `Bearer ${AuthInterceptor.accessToken}`
