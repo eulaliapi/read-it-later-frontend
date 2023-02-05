@@ -6,6 +6,16 @@ section {
     width: 100vw;
 }
 
+.infos {
+    display: none;
+}
+
+.logo {
+    width: 400px;
+    display: block;
+    margin: 0 auto;
+}
+
 .mat-card {
     min-height: 65vh;
 }
@@ -20,4 +30,15 @@ section {
         min-width: 130px!important;
     }
 
+}
+
+@media screen and (min-width: 992px) {
+
+    section {
+        justify-content: space-evenly;
+    }
+
+    .infos {
+        display:block;
+    }
 }
